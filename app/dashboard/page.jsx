@@ -1,0 +1,284 @@
+"use client";
+
+import getAllNotes from "@/actions/getAllNotes";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import { GiProgression } from "react-icons/gi";
+import { MdPendingActions } from "react-icons/md";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import SearchForm from "../components/SearchForm";
+import { useNote } from "../context/NoteContext";
+import getAllUsers from "@/actions/getAllUsers";
+import { useUser } from "../context/UserContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { parse } from "date-fns";
+
+const DashboardPage = () => {
+  const [loading, setLoading] = useState(true);
+  const { allNotes, setAllNotes } = useNote();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [showCal, setShowCal] = useState(false);
+  const [filteredNote, setFilteredNote] = useState([]);
+  console.log("filtered note=--==", filteredNote);
+
+  // handle date range
+  const handleDateRange = (dates) => {
+    const [start, end] = dates;
+    let filtered = allNotes.filter((singleNote) => {
+      let parsedDate = parse(singleNote.date, "yyyy-MM-dd", new Date());
+      return parsedDate >= start && parsedDate <= end;
+    });
+
+    setStartDate(start);
+    setEndDate(end);
+    setFilteredNote(filtered);
+  };
+
+  // handle reset filter
+  const handleRemoveFilter = () => {
+    setStartDate(null);
+    setEndDate(null);
+    setFilteredNote([]);
+  };
+
+  useEffect(() => {
+    const fetchedAllNotes = async () => {
+      const notes = await getAllNotes();
+      console.log("notes ---- dashboard ---", notes);
+      setAllNotes(notes);
+    };
+
+    if (loading) {
+      fetchedAllNotes();
+      setLoading(false);
+    }
+  }, []);
+
+  return (
+    <>
+      <div className=" grid grid-cols-4 p-2 mx-11 border border-slate-300 rounded-md bg-slate-100 ">
+        {/* filter section */}
+        <div className="bg-pink-200 flex flex-col gap-y-7 px-4 rounded-md ">
+          {/* search form */}
+          <div className="py-8">
+            <SearchForm />
+          </div>
+          <div className="flex flex-col gap-y-5 py-4 justify-around items-center  ">
+            <button
+              onClick={() => setShowCal(!showCal)}
+              className="rounded-full px-4 py-1 ring-1 ring-offset-2 ring-blue-500 bg-slate-500 text-white "
+            >
+              Search by Due Date
+            </button>
+
+            {!showCal ? (
+              <div></div>
+            ) : (
+              // ****** filter by date
+              <DatePicker
+                selected={startDate}
+                onChange={handleDateRange}
+                startDate={startDate}
+                endDate={endDate}
+                selectsRange
+                inline
+              />
+            )}
+            {/* romove button */}
+            <button
+              onClick={handleRemoveFilter}
+              className="rounded-full px-4 py-1 ring-1 ring-offset-2 ring-blue-500 bg-purple-500 text-white "
+            >
+              Remove All Filters
+            </button>
+          </div>
+        </div>
+
+        {/* *********** all notes && filtered notes section ************ */}
+        <div className=" col-span-3 ">
+          <div className="px-6 ">
+            <h1 className="text-center text-2xl text-slate-500 bg-sky-200 rounded-full ">
+              {filteredNote.length > 0 ? "Filtered Projects" : "All Porjects"}
+            </h1>
+          </div>
+          <div className="  p-6 ">
+            {loading && (
+              <p className=" grid justify-center items-center text-2xl font-bold text-slate-500 ">
+                {" "}
+                Loading....{" "}
+              </p>
+            )}
+
+            {!allNotes.length > 0 ? (
+              <div className="flex items-center justify-center">
+                <h1 className="text-3xl text-slate-500 ">
+                  {allNotes?.message}
+                </h1>
+              </div>
+            ) : startDate === null && endDate === null ? (
+              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-center items-center  bg-red-100  p-5 rounded-md ">
+                {allNotes?.map((note) => {
+                  const {
+                    creator_name,
+                    assignedToTeamName,
+                    date,
+                    priority,
+                    status,
+                    text,
+                    title,
+                  } = note;
+                  return (
+                    <Link href={`/dashboard/${note._id}`} key={note._id}>
+                      <div className=" cursor-pointer grid gap-3 hover:shadow-lg shadow-md hover:shadow-gray-500 transition-all duration-200 p-5 bg-gray-300/25 hover:ring-1 ring-offset-2 ring-offset-slate-300 rounded-md hover:ring-lime-300 hover:scale-105 text-sm ">
+                        <div className="">
+                          <h1> Task Creator : {creator_name} </h1>
+                          <h1> Task title: {title} </h1>
+                          <h1>
+                            {" "}
+                            Task Priority :{" "}
+                            <span
+                              className={
+                                (`${priority}` === "low"
+                                  ? "bg-lime-300 px-1 capitalize rounded-sm "
+                                  : undefined) ||
+                                (`${priority}` === "medium"
+                                  ? "bg-orange-300 px-1 capitalize rounded-sm "
+                                  : undefined) ||
+                                (`${priority}` === "high"
+                                  ? "bg-rose-400 px-1 text-white capitalize rounded-sm "
+                                  : undefined)
+                              }
+                            >
+                              {priority}
+                            </span>{" "}
+                          </h1>
+                          <p className="">Description : {text}</p>
+                        </div>
+                        <div>Due date : {date} </div>
+                        <div>
+                          <h2>assigned to : {assignedToTeamName} </h2>
+                        </div>
+                        <div>
+                          <h4 className="flex items-center justify-between  ">
+                            Status : {status}
+                            <span>
+                              {note.status === "completed" && (
+                                <IoCheckmarkDoneCircle
+                                  className="text-lime-600"
+                                  size={25}
+                                />
+                              )}
+                              {note.status === "in_progress" && (
+                                <GiProgression
+                                  className="text-orange-400"
+                                  size={25}
+                                />
+                              )}
+                              {note.status === "pending" && (
+                                <MdPendingActions
+                                  className="text-rose-600"
+                                  size={25}
+                                />
+                              )}
+                            </span>
+                          </h4>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : !filteredNote.length > 0 ? (
+              <div className="bg-rose-300 text-slate-700 flex items-center justify-center rounded-full p-4 text-xl capitalize ">
+                ~ No project found according to date ~{" "}
+              </div>
+            ) : (
+              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-around items-center bg-red-100  p-5 rounded-md ">
+                {filteredNote?.map((note) => {
+                  const {
+                    creator_name,
+                    assignedToTeamName,
+                    date,
+                    priority,
+                    status,
+                    text,
+                    title,
+                  } = note;
+                  return (
+                    <Link href={`/dashboard/${note._id}`} key={note._id}>
+                      <div className=" cursor-pointer grid gap-3 hover:shadow-lg shadow-md hover:shadow-gray-500 transition-all duration-200 p-5 bg-gray-300/25 hover:ring-1 ring-offset-2 ring-offset-slate-300 rounded-md hover:ring-lime-300 hover:scale-105 text-sm ">
+                        <div className="">
+                          <h1> Task Creator : {creator_name} </h1>
+                          <h1> Task title: {title} </h1>
+                          <h1>
+                            {" "}
+                            Task Priority :{" "}
+                            <span
+                              className={
+                                (`${priority}` === "low"
+                                  ? "bg-lime-300 px-1 capitalize rounded-sm "
+                                  : undefined) ||
+                                (`${priority}` === "medium"
+                                  ? "bg-orange-300 px-1 capitalize rounded-sm "
+                                  : undefined) ||
+                                (`${priority}` === "high"
+                                  ? "bg-rose-400 px-1 text-white capitalize rounded-sm "
+                                  : undefined)
+                              }
+                            >
+                              {priority}
+                            </span>{" "}
+                          </h1>
+                          <p className="">Description : {text}</p>
+                        </div>
+                        <div>Due date : {date} </div>
+                        <div>
+                          <h2>assigned to : {assignedToTeamName} </h2>
+                        </div>
+                        <div>
+                          <h4 className="flex items-center justify-between  ">
+                            Status : {status}
+                            <span>
+                              {note.status === "completed" && (
+                                <IoCheckmarkDoneCircle
+                                  className="text-lime-600"
+                                  size={25}
+                                />
+                              )}
+                              {note.status === "in_progress" && (
+                                <GiProgression
+                                  className="text-orange-400"
+                                  size={25}
+                                />
+                              )}
+                              {note.status === "pending" && (
+                                <MdPendingActions
+                                  className="text-rose-600"
+                                  size={25}
+                                />
+                              )}
+                            </span>
+                          </h4>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default DashboardPage;
+
+// today's task ===>
+// * create feature to search tasks according to priority, status, assigned_to team and show them on same dashboard page
+// * upload on git
