@@ -2,14 +2,10 @@
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { useNote } from "../context/NoteContext";
+import { useFilter } from "../context/FilterContext";
 
 const SearchForm = () => {
-  const { allNotes } = useNote();
-  // console.log("params all notes --", allNotes);
-
-  const router = useRouter();
+  const { filterQuery, setFilterQuery } = useFilter();
 
   const {
     register,
@@ -23,7 +19,7 @@ const SearchForm = () => {
     const sQuery = data.search;
     // console.log("search data ---->", sQuery);
 
-    router.push(`/search-note/${sQuery}`);
+    setFilterQuery(sQuery);
   };
 
   useEffect(() => {

@@ -8,17 +8,17 @@ Data Storage : Use local storage or Indexed DB of your browser to store all type
 
 Requirements:
 
-1. User Authentication:
+1. User Authentication: [**** Done ***]
    - Implement user authentication and registration functionalities.
    - Users should be able to sign up, log in, and log out.
    - Each user should have a profile with a profile picture, username, and bio.
 
-2. Task Creation and Management:
+2. Task Creation and Management: [**** Done ***]
    - Allow users to create tasks with a title, description, due date, and priority level.
    - Users should be able to assign tasks to other team members.
    - Implement a way to mark tasks as completed or in progress.
 
-3. Team Collaboration:  [*** In_Progress *** ]
+3. Team Collaboration:  [**** Done ***]
    - Create a team-based environment where users can form teams and invite others to join.
    - Users should only be able to view and manage tasks within their team.
 
