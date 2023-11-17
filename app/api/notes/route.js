@@ -33,6 +33,12 @@ export async function GET() {
     );
 
     // console.log("note with user name & assigned to name ----", notesWithUser);
+
+    // sort all data according to its created date. so that new data come first.
+    notesWithUser.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
+
     return NextResponse.json(notesWithUser);
   } catch (error) {
     console.log(error);

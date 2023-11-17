@@ -311,6 +311,3 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
-
-// today's task ===>
-// * add-note page design bug fixing

@@ -86,19 +86,19 @@ const NoteForm = () => {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className=" shadow-lg gap-3 p-6 rounded-lg border-t-4 border-blue-400  ">
+      <div className=" shadow-lg gap-3 p-6 rounded-lg border-y-4 border-blue-400  ">
         <h1 className=" text-slate-800/70 text-xl font-bold my-4">
           Create Task :
         </h1>
         <form
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 bg  p-3 "
           onSubmit={handleSubmit(formSubmit)}
           noValidate
         >
-          <div className="grid  justify-around w-[400px] pt-1 pb-3 items-center  ">
+          <div className="flex flex-col py-3 ">
             <label
               htmlFor="title"
-              className="text-slate-800/70 px-2 text-sm w-36 "
+              className="text-slate-800/70 px-2 text-sm font-semibold mb-1 "
             >
               Title :
             </label>
@@ -121,16 +121,16 @@ const NoteForm = () => {
           </div>
 
           {/* description */}
-          <div className="grid  justify-around w-[400px] pt-1 pb-3 items-center  ">
+          <div className="flex flex-col py-3  ">
             <label
               htmlFor="note_details"
-              className="text-slate-800/70 px-2 text-sm w-36 "
+              className="text-slate-800/70 px-2 text-sm  font-semibold mb-1 "
             >
               Description :
             </label>
             <textarea
               id="note_details"
-              className="inputClass focus:outline-none focus:ring-1 focus:ring-blue-300   "
+              className="border rounded-3xl border-gray-200 py-2 px-6 bg-zinc-100/40 focus:outline-none focus:ring-1 focus:ring-blue-300   "
               placeholder="Note Details"
               {...register("text", {
                 required: {
@@ -147,140 +147,152 @@ const NoteForm = () => {
           </div>
 
           {/* Priority level input */}
-          <div className="flex justify-around   w-[400px]  pb-3  ">
-            <span className="text-slate-800/75 ">Priority :</span>
-            <div>
-              <input
-                type="radio"
-                id="low"
-                value="low"
-                {...register("priority", {
-                  required: {
-                    value: true,
-                    message: "* Priority required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75"
-                htmlFor="low"
-              >
-                Low
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="medium"
-                value="medium"
-                {...register("priority", {
-                  required: {
-                    value: true,
-                    message: "* Priority required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75 "
-                htmlFor="medium"
-              >
-                Medium
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="high"
-                value="high"
-                {...register("priority", {
-                  required: {
-                    value: true,
-                    message: "* Priority required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75 "
-                htmlFor="high"
-              >
-                High
-              </label>
+          <div className="grid grid-cols-4 gap-x-6  px-4 py-3 border border-slate-400 rounded-full ">
+            <span className="text-slate-800/75  flex justify-center items-center ">
+              Priority :
+            </span>
+
+            <div className="col-span-3 flex  items-center justify-around gap-x-3 ">
+              <div className="  ">
+                <input
+                  type="radio"
+                  id="low"
+                  value="low"
+                  {...register("priority", {
+                    required: {
+                      value: true,
+                      message: "* Priority required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75"
+                  htmlFor="low"
+                >
+                  Low
+                </label>
+              </div>
+              <div className="">
+                <input
+                  type="radio"
+                  id="medium"
+                  value="medium"
+                  {...register("priority", {
+                    required: {
+                      value: true,
+                      message: "* Priority required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75 "
+                  htmlFor="medium"
+                >
+                  Medium
+                </label>
+              </div>
+              <div className="">
+                <input
+                  type="radio"
+                  id="high"
+                  value="high"
+                  {...register("priority", {
+                    required: {
+                      value: true,
+                      message: "* Priority required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75 "
+                  htmlFor="high"
+                >
+                  High
+                </label>
+              </div>
             </div>
           </div>
-          <p className="text-rose-500 text-xs -mt-4 pl-4">
+          <p className="text-rose-500 text-xs -mt-2 pl-4">
             {" "}
             {errors.priority?.message}{" "}
           </p>
 
           {/* Status  */}
-          <div className="flex justify-around   w-[400px]  pb-3  ">
-            <span className="text-slate-800/75 ">Status :</span>
-            <div>
-              <input
-                type="radio"
-                id="pending"
-                value="pending"
-                {...register("status", {
-                  required: {
-                    value: true,
-                    message: "* Status required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75"
-                htmlFor="pending"
-              >
-                Pending
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="in_progress"
-                value="in_progress"
-                {...register("status", {
-                  required: {
-                    value: true,
-                    message: "* Status required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75"
-                htmlFor="in_progress"
-              >
-                In Progress
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="completed"
-                value="completed"
-                {...register("status", {
-                  required: {
-                    value: true,
-                    message: "* Status required",
-                  },
-                })}
-              />
-              <label
-                className="ml-1 cursor-pointer text-slate-800/75 "
-                htmlFor="completed"
-              >
-                Completed
-              </label>
+          <div className="grid grid-cols-4 gap-x-6 px-4 py-3 border border-slate-400 rounded-full ">
+            <span className="text-slate-800/75  flex justify-center items-center">
+              Status :
+            </span>
+            <div className="col-span-3 flex items-center justify-around gap-x-3 ">
+              <div className="">
+                <input
+                  type="radio"
+                  id="pending"
+                  value="pending"
+                  {...register("status", {
+                    required: {
+                      value: true,
+                      message: "* Status required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75"
+                  htmlFor="pending"
+                >
+                  Pending
+                </label>
+              </div>
+              <div className="">
+                <input
+                  type="radio"
+                  id="in_progress"
+                  value="in_progress"
+                  {...register("status", {
+                    required: {
+                      value: true,
+                      message: "* Status required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75"
+                  htmlFor="in_progress"
+                >
+                  In Progress
+                </label>
+              </div>
+              <div className="">
+                <input
+                  type="radio"
+                  id="completed"
+                  value="completed"
+                  {...register("status", {
+                    required: {
+                      value: true,
+                      message: "* Status required",
+                    },
+                  })}
+                />
+                <label
+                  className="ml-1 cursor-pointer text-slate-800/75 "
+                  htmlFor="completed"
+                >
+                  Completed
+                </label>
+              </div>
             </div>
           </div>
-          <p className="text-rose-500 text-xs -mt-4 pl-4">
+          <p className="text-rose-500 text-xs -mt-2 pl-4">
             {" "}
             {errors.priority?.message}{" "}
           </p>
 
           {/* Due date */}
-          <div className="grid justify-around w-[400px] pt-1 pb-3 items-center   ">
-            <label className="text-slate-800/70 pl-2 text-sm" htmlFor="date">
+          <div className="flex flex-col py-3 ">
+            <label
+              className="text-slate-800/70 px-2 text-sm  font-semibold mb-1 "
+              htmlFor="date"
+            >
               Due Date :{" "}
             </label>
             <input
@@ -295,17 +307,17 @@ const NoteForm = () => {
                 },
               })}
             />
-            <p className="text-rose-500 text-xs  pl-4">
+            <p className="text-rose-500 text-xs mt-1  pl-4">
               {" "}
               {errors.date?.message}{" "}
             </p>
           </div>
 
           {/* Assigned to team */}
-          <div className="grid justify-around w-[400px] pt-1 pb-3 items-center  ">
+          <div className="flex flex-col py-3  ">
             <label
               htmlFor="assignee"
-              className="text-slate-800/70 px-2 text-sm w-36 "
+              className="text-slate-800/70 px-2 text-sm font-semibold mb-1 "
             >
               Assigned to :
             </label>
@@ -374,3 +386,12 @@ const NoteForm = () => {
 };
 
 export default NoteForm;
+
+// today's task ===>
+
+// 1. login form design bug fixing.
+// 2. register form design bug fixing.
+// 3. display min info in dashboard card & display project details in dynamic .project page card as well as give card component an elegent design.
+// 4. add alert feature before deleting any project
+// 5. design Home page with welcome note.
+// 6. giving navbar an elegent design.
