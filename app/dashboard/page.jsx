@@ -33,26 +33,28 @@ const DashboardPage = () => {
 
   // **** string search query function
   useEffect(() => {
-    const queryData = allNotes.filter((note) => {
-      return (
-        note.title.toLowerCase().includes(filterQuery.trim().toLowerCase()) ||
-        note.status.toLowerCase().includes(filterQuery.trim().toLowerCase()) ||
-        note.priority
-          .toLowerCase()
-          .includes(filterQuery.trim().toLowerCase()) ||
-        note.assignedToTeamName
-          .toLowerCase()
-          .includes(filterQuery.trim().toLowerCase()) ||
-        note.date.includes(filterQuery)
-      );
-    });
-    setFilteredNote(queryData);
-
-    if (queryData.length === 0) {
-      setFilteredNote([]);
+    if (filterQuery) {
+      const queryData = allNotes.filter((note) => {
+        return (
+          note.title.toLowerCase().includes(filterQuery.trim().toLowerCase()) ||
+          note.status
+            .toLowerCase()
+            .includes(filterQuery.trim().toLowerCase()) ||
+          note.priority
+            .toLowerCase()
+            .includes(filterQuery.trim().toLowerCase()) ||
+          note.assignedToTeamName
+            .toLowerCase()
+            .includes(filterQuery.trim().toLowerCase()) ||
+          note.date.includes(filterQuery)
+        );
+      });
+      setFilteredNote(queryData);
+      if (queryData.length === 0) {
+        setFilteredNote([]);
+      }
+      // console.log("query data----", queryData);
     }
-
-    // console.log("query data----", queryData);
   }, [filterQuery]);
 
   // handle date range
@@ -311,3 +313,4 @@ const DashboardPage = () => {
 export default DashboardPage;
 
 // today's task ===>
+// * add-note page design bug fixing
