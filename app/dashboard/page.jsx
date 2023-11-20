@@ -93,7 +93,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <div className=" grid grid-cols-4 p-2 mx-11 border border-slate-300 rounded-md bg-slate-100 ">
+      <div className=" grid grid-cols-4 p-2 mx-11 gap-x-2 border border-slate-300 rounded-md bg-slate-100">
         {/* filter section */}
         <div className="bg-purple-200 flex flex-col gap-y-7 px-4 rounded-md ">
           {/* search form */}
@@ -132,8 +132,8 @@ const DashboardPage = () => {
         </div>
 
         {/* *********** all notes && filtered notes section ************ */}
-        <div className=" col-span-3 ">
-          <div className="px-6 ">
+        <div className=" col-span-3 pt-6 bg-red-300 rounded-md">
+          <div className="px-6">
             <h1 className="text-center text-2xl text-slate-500 bg-sky-200 rounded-full ">
               {filteredNote.length > 0 ? "Filtered Projects" : "All Porjects"}
             </h1>
@@ -153,7 +153,7 @@ const DashboardPage = () => {
                 </h1>
               </div>
             ) : startDate === null && endDate === null && !filterQuery ? (
-              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-center items-center  bg-red-100  p-5 rounded-md ">
+              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-center items-center  bg-orange-100  p-5 rounded-md  h-[1000px] overflow-y-scroll   ">
                 {allNotes?.map((note) => {
                   const {
                     creator_name,
@@ -167,37 +167,45 @@ const DashboardPage = () => {
                   return (
                     <Link href={`/dashboard/${note._id}`} key={note._id}>
                       <div className=" cursor-pointer grid gap-3 hover:shadow-lg shadow-md hover:shadow-gray-500 transition-all duration-200 p-5 bg-gray-300/25 hover:ring-1 ring-offset-2 ring-offset-slate-300 rounded-md hover:ring-lime-300 hover:scale-105 text-sm ">
-                        <div className="">
-                          <h1> Task Creator : {creator_name} </h1>
-                          <h1> Task title: {title} </h1>
-                          <h1>
-                            {" "}
-                            Task Priority :{" "}
-                            <span
-                              className={
-                                (`${priority}` === "low"
-                                  ? "bg-lime-300 px-1 capitalize rounded-sm "
-                                  : undefined) ||
-                                (`${priority}` === "medium"
-                                  ? "bg-orange-300 px-1 capitalize rounded-sm "
-                                  : undefined) ||
-                                (`${priority}` === "high"
-                                  ? "bg-rose-400 px-1 text-white capitalize rounded-sm "
-                                  : undefined)
-                              }
-                            >
-                              {priority}
-                            </span>{" "}
-                          </h1>
-                          <p className="">Description : {text}</p>
+                        <div className="pb-5">
+                          <h1 className="text-xl font-semibold ">{title}</h1>
                         </div>
-                        <div>Due date : {date} </div>
-                        <div>
-                          <h2>assigned to : {assignedToTeamName} </h2>
+                        <div className="flex justify-between items-center ">
+                          <h2 className="flex flex-col gap-1 items-center justify-center ">
+                            assigned to :
+                            <span className="underline-offset-4 underline  font-bold">
+                              {assignedToTeamName}
+                            </span>
+                          </h2>
+                          <h4 className=" flex flex-col gap-1 items-center justify-center ">
+                            Due date :
+                            <span className="underline underline-offset-4 font-bold ">
+                              {date}
+                            </span>
+                          </h4>
                         </div>
+
                         <div>
                           <h4 className="flex items-center justify-between  ">
-                            Status : {status}
+                            {/* Status : {status} */}
+                            <h1>
+                              {/* Priority : */}
+                              <span
+                                className={
+                                  (`${priority}` === "low"
+                                    ? "bg-lime-300 px-1 capitalize rounded-sm  font-bold  tracking-wider "
+                                    : undefined) ||
+                                  (`${priority}` === "medium"
+                                    ? "bg-orange-300 px-1 capitalize rounded-sm font-bold tracking-wider  "
+                                    : undefined) ||
+                                  (`${priority}` === "high"
+                                    ? "bg-rose-400 px-1 text-white capitalize rounded-sm font-bold tracking-wider "
+                                    : undefined)
+                                }
+                              >
+                                {priority}
+                              </span>{" "}
+                            </h1>
                             <span>
                               {note.status === "completed" && (
                                 <IoCheckmarkDoneCircle

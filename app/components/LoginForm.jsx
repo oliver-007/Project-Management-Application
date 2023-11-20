@@ -40,12 +40,12 @@ const LoginForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <div className="grid place-items-center h-screen">
-      <div className=" shadow-lg gap-3 p-6 rounded-lg border-t-4 border-blue-400  ">
+    <div className="grid place-items-center grid-cols-4  grid-rows-6 px-16 ">
+      <div className="shadow-lg gap-3 p-6 rounded-lg border-y-4 border-blue-400  col-start-2 col-span-2 row-start-3 row-span-2 w-full max-w-2xl ">
         <h1 className=" text-slate-800/70 text-xl font-bold my-4">Login :</h1>
         <form
           onSubmit={handleSubmit(formSubmit)}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3  "
         >
           <input
             className="inputClass focus:outline-none focus:ring-1 focus:ring-blue-300 "

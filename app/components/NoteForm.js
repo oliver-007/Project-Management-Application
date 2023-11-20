@@ -85,7 +85,7 @@ const NoteForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <div className="grid place-items-center h-screen">
+    <div className="grid place-items-center h-screen ">
       <div className=" shadow-lg gap-3 p-6 rounded-lg border-y-4 border-blue-400  ">
         <h1 className=" text-slate-800/70 text-xl font-bold my-4">
           Create Task :
@@ -388,9 +388,7 @@ const NoteForm = () => {
 export default NoteForm;
 
 // today's task ===>
-
-// 1. login form design bug fixing.
-// 2. register form design bug fixing.
+// 2. showing filter data design bug fixing
 // 3. display min info in dashboard card & display project details in dynamic .project page card as well as give card component an elegent design.
 // 4. add alert feature before deleting any project
 // 5. design Home page with welcome note.

@@ -76,8 +76,8 @@ const RegisterForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <div className="grid place-items-center h-screen">
-      <div className=" gap-3 border-t-4 border-cyan-400 rounded-lg shadow-lg p-6 ">
+    <div className="grid place-items-center grid-cols-4  grid-rows-4 px-16 ">
+      <div className=" gap-3 p-6 border-y-4 border-cyan-400 rounded-lg shadow-lg  col-start-2 col-span-2 row-start-2 row-span-2 w-full max-w-2xl  ">
         <h1 className=" text-slate-800/70 text-xl font-bold my-4 ">
           Register :{" "}
         </h1>
@@ -232,12 +232,6 @@ const RegisterForm = () => {
             now.
           </p>
         </form>
-        {/* {message && (
-          <p className="text-center mt-3 bg-gray-500 text-white rounded-full py-2 px-5 ">
-            {" "}
-            {message}{" "}
-          </p>
-        )} */}
         {message && (
           <div className="flex justify-around items-center bg-black rounded-full my-2 py-2 ">
             <p className="text-center  text-yellow-400 rounded-full py-2 px-5 ">
