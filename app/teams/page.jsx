@@ -169,7 +169,7 @@ const teamPage = () => {
           )}
         </div>
 
-        {/* create and join team section */}
+        {/* create team section */}
         <div className="bg-purple-200  p-8 col-span-2  ">
           <div className=" flex flex-col  ">
             {" "}

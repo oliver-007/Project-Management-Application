@@ -234,11 +234,11 @@ const DashboardPage = () => {
                 })}
               </div>
             ) : !filteredNote.length > 0 ? (
-              <div className="bg-rose-300 text-slate-700 flex items-center justify-center rounded-full p-4 text-xl capitalize ">
-                ~ No project found according to date ~{" "}
+              <div className="bg-slate-300 text-slate-700 flex items-center justify-center rounded-full p-4 text-xl capitalize ">
+                ~ No project found ~{" "}
               </div>
             ) : (
-              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-around items-center bg-red-100  p-5 rounded-md ">
+              <div className="  grid grid-cols-3 gap-x-7 gap-y-10 justify-center  bg-orange-100  p-5 rounded-md  h-[1000px] overflow-y-scroll   ">
                 {filteredNote?.map((note) => {
                   const {
                     creator_name,
@@ -252,37 +252,45 @@ const DashboardPage = () => {
                   return (
                     <Link href={`/dashboard/${note._id}`} key={note._id}>
                       <div className=" cursor-pointer grid gap-3 hover:shadow-lg shadow-md hover:shadow-gray-500 transition-all duration-200 p-5 bg-gray-300/25 hover:ring-1 ring-offset-2 ring-offset-slate-300 rounded-md hover:ring-lime-300 hover:scale-105 text-sm ">
-                        <div className="">
-                          <h1> Task Creator : {creator_name} </h1>
-                          <h1> Task title: {title} </h1>
-                          <h1>
-                            {" "}
-                            Task Priority :{" "}
-                            <span
-                              className={
-                                (`${priority}` === "low"
-                                  ? "bg-lime-300 px-1 capitalize rounded-sm "
-                                  : undefined) ||
-                                (`${priority}` === "medium"
-                                  ? "bg-orange-300 px-1 capitalize rounded-sm "
-                                  : undefined) ||
-                                (`${priority}` === "high"
-                                  ? "bg-rose-400 px-1 text-white capitalize rounded-sm "
-                                  : undefined)
-                              }
-                            >
-                              {priority}
-                            </span>{" "}
-                          </h1>
-                          <p className="">Description : {text}</p>
+                        <div className="pb-5">
+                          <h1 className="text-xl font-semibold ">{title}</h1>
                         </div>
-                        <div>Due date : {date} </div>
-                        <div>
-                          <h2>assigned to : {assignedToTeamName} </h2>
+                        <div className="flex justify-between items-center ">
+                          <h2 className="flex flex-col gap-1 items-center justify-center ">
+                            assigned to :
+                            <span className="underline-offset-4 underline  font-bold">
+                              {assignedToTeamName}
+                            </span>
+                          </h2>
+                          <h4 className=" flex flex-col gap-1 items-center justify-center ">
+                            Due date :
+                            <span className="underline underline-offset-4 font-bold ">
+                              {date}
+                            </span>
+                          </h4>
                         </div>
+
                         <div>
                           <h4 className="flex items-center justify-between  ">
-                            Status : {status}
+                            {/* Status : {status} */}
+                            <h1>
+                              {/* Priority : */}
+                              <span
+                                className={
+                                  (`${priority}` === "low"
+                                    ? "bg-lime-300 px-1 capitalize rounded-sm  font-bold  tracking-wider "
+                                    : undefined) ||
+                                  (`${priority}` === "medium"
+                                    ? "bg-orange-300 px-1 capitalize rounded-sm font-bold tracking-wider  "
+                                    : undefined) ||
+                                  (`${priority}` === "high"
+                                    ? "bg-rose-400 px-1 text-white capitalize rounded-sm font-bold tracking-wider "
+                                    : undefined)
+                                }
+                              >
+                                {priority}
+                              </span>{" "}
+                            </h1>
                             <span>
                               {note.status === "completed" && (
                                 <IoCheckmarkDoneCircle

@@ -48,7 +48,7 @@ export async function GET(request, { params }) {
 
 // **********  update note ***********
 export async function PATCH(request, { params }) {
-  console.log(" update note params from API dynamic route ---", params);
+  // console.log(" update note params from API dynamic route ---", params);
   try {
     const note = await Note.findById(params.noteId);
     // console.log("update NOTE find from database api dynamic route=== ", note);

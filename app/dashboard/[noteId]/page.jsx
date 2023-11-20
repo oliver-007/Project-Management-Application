@@ -8,12 +8,18 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiTwotoneDelete } from "react-icons/ai";
+import { GiProgression } from "react-icons/gi";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import { MdPendingActions } from "react-icons/md";
 import { TiArrowBack } from "react-icons/ti";
 
 const singleNote = () => {
   const [noteData, setNoteData] = useState({});
   console.log("note data ---- ", noteData);
   const [loading, setLoading] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
+  const [projectName, setProjectName] = useState("");
+  const [projectId, setProjectId] = useState("");
   const { allTeams, setAllTeams } = useTeam();
 
   const { data: session, status: session_status } = useSession();
@@ -52,6 +58,13 @@ const singleNote = () => {
 
     fetchedTeams();
   }, []);
+
+  // ****** handle show alert
+  const handleAlert = (id, title) => {
+    setProjectName(title);
+    setProjectId(id);
+    setShowAlert(true);
+  };
 
   // handle delete function
   const handleDelete = async (id) => {
@@ -92,41 +105,121 @@ const singleNote = () => {
           Loading....{" "}
         </p>
       ) : (
-        <div className="grid  justify-center items-center h-screen  ">
-          <div className="  grid gap-5 p-5 max-w-2xl bg-gray-300/25  rounded-md text-2xl ">
-            <div className=" max-w-xs ">
-              <h1> Task Creator : {creator_name} </h1>
-              <h1> Task title: {title} </h1>
-              <h1>
-                {" "}
-                Task Priority :{" "}
-                <span
-                  className={
-                    (`${priority}` === "low"
-                      ? "bg-lime-300 px-1 capitalize rounded-sm "
-                      : undefined) ||
-                    (`${priority}` === "medium"
-                      ? "bg-orange-300 px-1 capitalize rounded-sm "
-                      : undefined) ||
-                    (`${priority}` === "high"
-                      ? "bg-rose-400 px-1 text-white capitalize rounded-sm "
-                      : undefined)
-                  }
-                >
-                  {priority}
-                </span>{" "}
-              </h1>
-              <p className="">Description : {text}</p>
+        <div className="px-10  ">
+          {/* show alert box */}
+          {showAlert ? (
+            <div className="flex items-center justify-center  ">
+              <div className="bg-cyan-100 flex justify-around items-center py-2 px-4 w-full ">
+                <p className="text-lg text-slate-700">
+                  You really want to
+                  <span className="font-bold "> Delete " {projectName} " </span>
+                  ?
+                </p>
+                <div className="flex items-center  justify-around w-64">
+                  <button
+                    onClick={() => setShowAlert(false)}
+                    className="bg-lime-400 px-3 py-1 rounded-lg text-slate-700 hover:ring-1 hover:ring-offset-2 hover:ring-blue-400 hover:bg-slate-100 hover:text-slate-700 hover:transition-colors duration-200 "
+                  >
+                    No
+                  </button>
+                  <button
+                    onClick={() => handleDelete(projectId)}
+                    className="bg-red-400 px-3 py-1 rounded-lg text-white hover:ring-1 hover:ring-offset-2 hover:ring-red-500 hover:bg-slate-100 hover:text-slate-700 hover:transition-colors duration-200"
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
             </div>
-            <div>Due date : {date} </div>
-            <div>
-              <h2>assigned to : {assignedToTeamName} </h2>
-            </div>
-            <div className="grid gap-6">
-              <h4>Status : {status} </h4>
+          ) : (
+            <div></div>
+          )}
+          <div className="grid rounded-md grid-cols-4  justify-center items-center h-[1000px] bg-orange-200/50 ">
+            <div className="  grid gap-3 col-start-2 col-span-2 shadow-lg p-8 bg-slate-100 rounded-lg ">
+              <div className="pb-5 flex items-center justify-center ">
+                <h1 className=" underline underline-offset-4 text-xl font-semibold capitalize ">
+                  {title}
+                </h1>
+              </div>
+              <div className="bg  p-2 border border-slate-400 rounded-lg ">
+                <h3 className=" flex flex-col   ">
+                  <span className="font-bold  ">Details :</span>
+                  {text}
+                </h3>
+              </div>
+              <div className="flex items-center justify-center ">
+                <h1 className="flex gap-x-2">
+                  Creator :
+                  <span className="underline-offset-4 underline capitalize  font-bold">
+                    {creator_name}
+                  </span>
+                </h1>
+              </div>
+              <div className="flex justify-between items-center ">
+                <h2 className="flex gap-x-2">
+                  assigned to :
+                  <span className="underline-offset-4 underline  font-bold">
+                    {assignedToTeamName}
+                  </span>
+                </h2>
+                <h4 className=" flex gap-x-2 ">
+                  Due date :
+                  <span className="underline underline-offset-4 font-bold ">
+                    {date}
+                  </span>
+                </h4>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between  ">
+                  {/* Status : {status} */}
+                  <h1 className="flex gap-x-2">
+                    Priority :
+                    <span
+                      className={
+                        (`${priority}` === "low"
+                          ? "bg-lime-300 px-1 capitalize rounded-sm  font-bold  tracking-wider "
+                          : undefined) ||
+                        (`${priority}` === "medium"
+                          ? "bg-orange-300 px-1 capitalize rounded-sm font-bold tracking-wider  "
+                          : undefined) ||
+                        (`${priority}` === "high"
+                          ? "bg-rose-400 px-1 text-white capitalize rounded-sm font-bold tracking-wider "
+                          : undefined)
+                      }
+                    >
+                      {priority}
+                    </span>{" "}
+                  </h1>
+                  <div className="flex gap-x-3">
+                    <h3 className="flex gap-x-2 ">
+                      {" "}
+                      Status :{" "}
+                      <span className="font-bold underline capitalize underline-offset-4  ">
+                        {" "}
+                        {status}{" "}
+                      </span>{" "}
+                    </h3>
+                    <span className="">
+                      {status === "completed" && (
+                        <IoCheckmarkDoneCircle
+                          className="text-lime-600"
+                          size={25}
+                        />
+                      )}
+                      {status === "in_progress" && (
+                        <GiProgression className="text-orange-400" size={25} />
+                      )}
+                      {status === "pending" && (
+                        <MdPendingActions className="text-rose-600" size={25} />
+                      )}
+                    </span>
+                  </div>
+                </div>
+              </div>
 
               {/* buttons  */}
-              <div className="flex items-center justify-between ">
+              <div className="flex items-center justify-between pt-14 ">
                 {/* back button */}
                 <div className="bg-slate-500 rounded-md hover:ring-1 hover:ring-offset-2 hover:ring-zinc-500 hover:shadow-lg hover:shadow-zinc-400 hover:transition-all duration-200  ">
                   <Link href={"/dashboard"}>
@@ -156,7 +249,7 @@ const singleNote = () => {
                       {/* delete button */}
                       <button
                         type="button"
-                        onClick={() => handleDelete(_id)}
+                        onClick={() => handleAlert(_id, title)}
                         className=" hover:shadow-lg hover:shadow-rose-300 hover:ring-1 ring-offset-2 ring-rose-300 rounded-md hover:transition-all duration-200  bg-rose-500  text-white px-2 py-1 text-base "
                       >
                         <span className="flex justify-center items-center gap-x-1 ">

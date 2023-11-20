@@ -388,8 +388,6 @@ const NoteForm = () => {
 export default NoteForm;
 
 // today's task ===>
-// 2. showing filter data design bug fixing
-// 3. display min info in dashboard card & display project details in dynamic .project page card as well as give card component an elegent design.
-// 4. add alert feature before deleting any project
+
 // 5. design Home page with welcome note.
 // 6. giving navbar an elegent design.
