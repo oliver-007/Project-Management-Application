@@ -24,7 +24,7 @@ const UserProfile = () => {
   };
 
   const receiver_Id = session?.user?.id;
-  console.log("receiver id profile page ---", receiver_Id);
+  // console.log("receiver id profile page ---", receiver_Id);
 
   useEffect(() => {
     const fetchedInvitations = async () => {
@@ -71,7 +71,7 @@ const UserProfile = () => {
 
   // ******** Accept function
   const handleAccept = async (id) => {
-    console.log("handle accept id ===", id);
+    // console.log("handle accept id ===", id);
 
     try {
       const res = await fetch(`/api/invitations/${id}`, {
@@ -86,7 +86,7 @@ const UserProfile = () => {
       } else {
         const { message } = await res.json();
         setMessage(message);
-        console.log("invitation Accept Success", msg);
+        console.log("invitation Accept Success", message);
       }
     } catch (error) {
       console.log("err msg===", error);

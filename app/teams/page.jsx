@@ -60,7 +60,7 @@ const TeamPage = () => {
   useEffect(() => {
     const fetchedTeams = async () => {
       const teams = await getAllTeams(creatorId);
-      console.log("all teams from team-management page---", teams);
+      // console.log("all teams from team-management page---", teams);
       setAllTeams(teams);
       setLoading(false);
     };
@@ -141,7 +141,7 @@ const TeamPage = () => {
               {!allTeams?.length > 0 ? (
                 <p className=" text-yellow-700 text-lg font-semibold flex items-center justify-center mt-5 bg-slate-300 ring-1 ring-offset-2 ring-slate-400 py-2 rounded-full ">
                   {" "}
-                  {allTeams.message}{" "}
+                  {allTeams?.message}{" "}
                 </p>
               ) : (
                 <div className=" p-2  ">

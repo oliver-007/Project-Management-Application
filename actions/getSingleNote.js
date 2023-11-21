@@ -1,7 +1,7 @@
 const url = process.env.NEXT_PUBLIC_URL;
 
 const getSingleNote = async (noteId) => {
-  console.log("note id from get single note-----", noteId);
+  // console.log("note id from get single note-----", noteId);
   try {
     const res = await fetch(
       `${url}/api/notes/${noteId}`,

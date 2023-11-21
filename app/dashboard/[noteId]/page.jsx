@@ -15,7 +15,7 @@ import { TiArrowBack } from "react-icons/ti";
 
 const SingleNote = () => {
   const [noteData, setNoteData] = useState({});
-  console.log("note data ---- ", noteData);
+  // console.log("note data ---- ", noteData);
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [projectName, setProjectName] = useState("");
@@ -24,20 +24,20 @@ const SingleNote = () => {
 
   const { data: session, status: session_status } = useSession();
 
-  console.log("session_status---", session_status);
-  console.log("session----", session);
+  // console.log("session_status---", session_status);
+  // console.log("session----", session);
 
   const router = useRouter();
   const params = useParams();
   const { noteId } = params;
-  console.log("params ----", noteId);
+  // console.log("params ----", noteId);
 
   // *** fetching single note
   useEffect(() => {
     const fetchedSingleNote = async () => {
       try {
         const note = await getSingleNote(noteId);
-        console.log("single note dashboar dynamic page ----", note);
+        // console.log("single note dashboar dynamic page ----", note);
         setNoteData(note);
         setLoading(false);
       } catch (error) {
@@ -52,7 +52,7 @@ const SingleNote = () => {
   useEffect(() => {
     const fetchedTeams = async () => {
       const teams = await getAllTeams(session?.user?.id);
-      console.log("all teams from dynamic note page", teams);
+      // console.log("all teams from dynamic note page", teams);
       setAllTeams(teams);
     };
 

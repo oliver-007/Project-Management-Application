@@ -15,7 +15,7 @@ const NoteForm = () => {
   const [message, setMessage] = useState("");
   // const [allUsers, setAllUsers] = useState([]);
   const { data: session } = useSession();
-  console.log("note page session: ", session);
+  // console.log("note page session: ", session);
 
   // const { allUsers, setAllUsers } = useUser();
   const { allTeams, setAllTeams } = useTeam();

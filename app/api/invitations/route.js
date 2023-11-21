@@ -11,9 +11,9 @@ export async function POST(request) {
   try {
     const { senderId, receiverId, teamId } = await request.json();
 
-    console.log("raw receiver ====", receiverId);
-    console.log("raw sender ====", senderId);
-    console.log("raw team id ====", teamId);
+    // console.log("raw receiver ====", receiverId);
+    // console.log("raw sender ====", senderId);
+    // console.log("raw team id ====", teamId);
 
     const validSender = await User.findById(senderId)
       .select("-password")
@@ -28,7 +28,7 @@ export async function POST(request) {
       .select("-password")
       .lean()
       .exec();
-    console.log("valid receivers ----", validReceiver);
+    // console.log("valid receivers ----", validReceiver);
 
     if (validReceiver && validSender && validTeam) {
       const existingInvitation = await Invitation.findOne({
@@ -36,7 +36,7 @@ export async function POST(request) {
         receiverId: validReceiver._id,
         teamId: validTeam._id,
       });
-      console.log("existing invitation -----", existingInvitation);
+      // console.log("existing invitation -----", existingInvitation);
 
       if (!existingInvitation) {
         const createInvitation = await Invitation.create({
@@ -45,7 +45,7 @@ export async function POST(request) {
           receiverId: validReceiver._id,
         });
 
-        console.log("create invitation ---", createInvitation);
+        // console.log("create invitation ---", createInvitation);
         return NextResponse.json(
           {
             message: `Invitation sent to " ${validReceiver?.name} " Successful`,
@@ -54,7 +54,7 @@ export async function POST(request) {
         );
       } else {
         const invitStatus = await existingInvitation?.invitationStatus;
-        console.log("invitation status ---- ", invitStatus);
+        // console.log("invitation status ---- ", invitStatus);
 
         if (invitStatus === "Pending") {
           return NextResponse.json(

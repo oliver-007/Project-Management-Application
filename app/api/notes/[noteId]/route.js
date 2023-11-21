@@ -11,7 +11,7 @@ dbConnect();
 
 // ***********  get single note  *************
 export async function GET(request, { params }) {
-  console.log("params from api dynamic route ---", params);
+  // console.log("params from api dynamic route ---", params);
   try {
     if (!params.noteId) {
       return new NextResponse(

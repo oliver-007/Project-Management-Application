@@ -109,10 +109,10 @@ export async function DELETE(request, { params }) {
 export async function PATCH(request, { params }) {
   try {
     const invitation_id = params.Id;
-    console.log("invitation id from api route PATCH----", invitation_id);
+    // console.log("invitation id from api route PATCH----", invitation_id);
 
     const invitation = await Invitation.findById(invitation_id).exec();
-    console.log("invitation form api route inivtation===", invitation);
+    // console.log("invitation form api route inivtation===", invitation);
 
     if (!invitation) {
       return NextResponse.json(
@@ -134,10 +134,10 @@ export async function PATCH(request, { params }) {
       );
     } else {
       const team_id = invitation?.teamId;
-      console.log("team id api invitation dynamic route ---", team_id);
+      // console.log("team id api invitation dynamic route ---", team_id);
 
       const selectedTeam = await Team.findById(team_id).exec();
-      console.log("seelcted team----", selectedTeam);
+      // console.log("seelcted team----", selectedTeam);
 
       const receiver_id = await invitation?.receiverId;
 

@@ -17,7 +17,7 @@ const SingleUserPage = () => {
   // console.log("single user===", singleUser);
 
   const { data: session, status } = useSession();
-  console.log("session Sender Id ---", session?.user?.id);
+  // console.log("session Sender Id ---", session?.user?.id);
 
   const searchParams = useSearchParams();
   const teamId = searchParams.get("teamId");

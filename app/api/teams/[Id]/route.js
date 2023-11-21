@@ -124,7 +124,7 @@ export async function PATCH(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     const team_id = params.Id;
-    console.log("team id api team route dynamic---", team_id);
+    // console.log("team id api team route dynamic---", team_id);
 
     const validTeam = await Team.findById(team_id).lean().exec();
     // console.log("valid team api team route dynamic ---", validTeam);

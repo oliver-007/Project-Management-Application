@@ -14,14 +14,14 @@ const UpdateNoteForm = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [message, setMessage] = useState("");
   const { allTeams } = useTeam();
-  console.log("all teams from update note form page===", allTeams);
+  // console.log("all teams from update note form page===", allTeams);
 
   const router = useRouter();
 
-  console.log("note data from update note form---", noteData);
+  // console.log("note data from update note form---", noteData);
   const params = useParams();
   const noteId = params.taskId;
-  console.log("update note form params---- ", params);
+  // console.log("update note form params---- ", params);
 
   useEffect(() => {
     const fetchedFromData = async () => {
@@ -41,7 +41,7 @@ const UpdateNoteForm = () => {
     fetchedFromData();
   }, [noteId]);
 
-  console.log("note data existing value ---", noteData);
+  // console.log("note data existing value ---", noteData);
 
   const { register, handleSubmit, formState, setValue } = useForm({
     title: "",
@@ -81,7 +81,7 @@ const UpdateNoteForm = () => {
 
         date: format(date, "yyyy-MM-dd"),
       };
-      console.log("form data : ", formData);
+      // console.log("form data : ", formData);
 
       const res = await fetch(`/api/notes/${noteId}`, {
         method: "PATCH",
