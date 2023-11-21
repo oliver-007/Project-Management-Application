@@ -22,7 +22,7 @@ Requirements:
    - Create a team-based environment where users can form teams and invite others to join.
    - Users should only be able to view and manage tasks within their team.
 
-4. Task Filtering and Sorting:
+4. Task Filtering and Sorting: [**** Done ***]
    - Provide options to filter tasks by their status (completed, in progress, pending) and due date.
    - Allow users to sort tasks by different criteria (priority, due date, etc.).
 

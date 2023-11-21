@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div className="px-11 mt-6">
-      <div className="flex  justify-around bg-zinc-400 rounded-lg py-3 mb-3 ">
+      <div className="flex justify-around bg-sky-400 rounded-lg py-3 mb-3 ">
         <div className="flex justify-center ">
           <ul className=" space-x-6 ">
             <Link
