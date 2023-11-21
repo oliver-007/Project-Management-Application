@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { RxCrossCircled } from "react-icons/rx";
 
-const teamPage = () => {
+const TeamPage = () => {
   const { allUsers, setAllUsers } = useUser();
   const [openTeamForm, setOpenTeamForm] = useState(false);
   const { allTeams, setAllTeams } = useTeam();
@@ -65,7 +65,7 @@ const teamPage = () => {
       setLoading(false);
     };
     fetchedTeams();
-  }, [session]);
+  }, [session, creatorId, setAllTeams]);
 
   useEffect(() => {
     const fetchedUsers = async () => {
@@ -74,7 +74,7 @@ const teamPage = () => {
       setLoading(false);
     };
     fetchedUsers();
-  }, []);
+  }, [setAllUsers]);
   return (
     <div className="px-7">
       {/* show alert box */}
@@ -83,7 +83,11 @@ const teamPage = () => {
           <div className="bg-cyan-100 flex justify-around items-center py-2 px-4 w-full ">
             <p className="text-lg text-slate-700">
               You really want to
-              <span className="font-bold "> Delete " {tmName} " </span>?
+              <span className="font-bold ">
+                {" "}
+                Delete &quot; {tmName} &quot;{" "}
+              </span>
+              ?
             </p>
             <div className="flex items-center  justify-around w-64">
               <button
@@ -104,7 +108,7 @@ const teamPage = () => {
       ) : (
         <div></div>
       )}
-      <div className="bg-pink-300 h-screen grid grid-cols-5 p-4 ">
+      <div className="bg-pink-300 grid h-[1000px] grid-cols-5 p-4 ">
         {/* displaying All Teams name */}
         <div className="bg-lime-200 p-8 col-span-2 ">
           <div className="py-1 text-lg rounded-full flex justify-center bg-indigo-300">
@@ -185,16 +189,16 @@ const teamPage = () => {
         </div>
 
         {/* display All Users Name */}
-        <div className="bg-orange-200 p-8 ">
+        <div className="bg-orange-200 h-full py-8 px-3 ">
           <div className="py-1 text-lg rounded-full flex justify-center bg-indigo-300">
             <h2>--- Users ---</h2>
           </div>
           {loading ? (
-            <p className="text-lg flex h-screen justify-center items-center font-semibold text-slate-500  ">
+            <p className="text-lg flex justify-center items-center font-semibold text-slate-500  ">
               Loading....
             </p>
           ) : (
-            <div>
+            <div className=" h-[850px] overflow-y-scroll ">
               {!allUsers?.length > 0 ? (
                 <p className=" text-yellow-700 text-lg font-semibold flex items-center justify-center mt-5 bg-slate-300 ring-1 ring-offset-2 ring-slate-400 py-2 rounded-full ">
                   {" "}
@@ -231,4 +235,4 @@ const teamPage = () => {
   );
 };
 
-export default teamPage;
+export default TeamPage;

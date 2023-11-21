@@ -10,7 +10,7 @@ import { TiArrowBack } from "react-icons/ti";
 import { useSession } from "next-auth/react";
 import { RxCrossCircled } from "react-icons/rx";
 
-const page = () => {
+const SingleUserPage = () => {
   const [singleUser, setSingleUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -40,7 +40,7 @@ const page = () => {
       }
     };
     filteredUser();
-  }, []);
+  }, [userId]);
 
   // ************** sent invitation to users
   const sendInvitation = async () => {
@@ -151,4 +151,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingleUserPage;

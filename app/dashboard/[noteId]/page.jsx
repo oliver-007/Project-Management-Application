@@ -13,7 +13,7 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { MdPendingActions } from "react-icons/md";
 import { TiArrowBack } from "react-icons/ti";
 
-const singleNote = () => {
+const SingleNote = () => {
   const [noteData, setNoteData] = useState({});
   console.log("note data ---- ", noteData);
   const [loading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ const singleNote = () => {
     };
 
     fetchedTeams();
-  }, []);
+  }, [session?.user?.id, setAllTeams]);
 
   // ****** handle show alert
   const handleAlert = (id, title) => {
@@ -112,7 +112,10 @@ const singleNote = () => {
               <div className="bg-cyan-100 flex justify-around items-center py-2 px-4 w-full ">
                 <p className="text-lg text-slate-700">
                   You really want to
-                  <span className="font-bold "> Delete " {projectName} " </span>
+                  <span className="font-bold ">
+                    {" "}
+                    Delete &quot; {projectName} &quot;{" "}
+                  </span>
                   ?
                 </p>
                 <div className="flex items-center  justify-around w-64">
@@ -268,4 +271,4 @@ const singleNote = () => {
   );
 };
 
-export default singleNote;
+export default SingleNote;

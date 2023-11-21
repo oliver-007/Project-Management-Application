@@ -8,7 +8,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 
-const page = () => {
+const SingleTeamPage = () => {
   const { allTeams } = useTeam();
   const { allUsers } = useUser();
   // console.log("all users ---", allUsers);
@@ -53,7 +53,7 @@ const page = () => {
     setCurrTeam(currentTeam);
     setLoading(false);
     // console.log("current team info --", currentTeam);
-  }, []);
+  }, [allTeams, teamId]);
 
   // ******* filter out remaining users without team members
   useEffect(() => {
@@ -62,19 +62,14 @@ const page = () => {
     );
     // console.log("remaining users====", remainingUsers);
     setRemainingUsers(usersRemained);
-  }, [currTeam]);
+  }, [currTeam, allUsers]);
 
   return (
     <div className="p-8">
       <h1 className=" flex items-center justify-center text-3xl font-semibold text-slate-700/75 pb-5 bg-lime-100 ">
         {currTeam[0]?.name || <p>No Team Selected</p>}
       </h1>
-      {/* {message && (
-        <p className="text-center mt-3 bg-gray-500 text-white rounded-full py-2 px-5 ">
-          {" "}
-          {message}{" "}
-        </p>
-      )} */}
+
       {message && (
         <div className="flex justify-around items-center bg-black rounded-full my-2 py-2 ">
           <p className="text-center  text-yellow-400 rounded-full py-2 px-5 ">
@@ -103,7 +98,7 @@ const page = () => {
               Loading....
             </p>
           ) : (
-            <div className="">
+            <div className=" h-[900px] overflow-y-scroll ">
               {!remainingUsers?.length > 0 ? (
                 <p className=" text-yellow-700 text-lg font-semibold flex items-center justify-center mt-5 bg-slate-300 ring-1 ring-offset-2 ring-slate-400 py-2 rounded-full ">
                   {remainingUsers?.message || "No User Found"}
@@ -146,7 +141,7 @@ const page = () => {
             <h2>---Current Team Members---</h2>
           </div>
 
-          <div>
+          <div className="h-[900px] overflow-y-scroll ">
             {!currTeam[0]?.membersInfo?.length > 0 ? (
               <p className=" text-yellow-700 text-lg font-semibold flex items-center justify-center mt-5 bg-slate-300 ring-1 ring-offset-2 ring-slate-400 py-2 rounded-full ">
                 No Team Member Found
@@ -195,4 +190,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingleTeamPage;

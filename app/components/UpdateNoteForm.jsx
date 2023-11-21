@@ -27,7 +27,7 @@ const UpdateNoteForm = () => {
     const fetchedFromData = async () => {
       try {
         const note = await getSingleNote(noteId);
-        console.log("note from update note form----", note);
+        // console.log("note from update note form----", note);
 
         // const users = await getAllUsers();
         // console.log("users from update note form ----", users);
@@ -39,7 +39,7 @@ const UpdateNoteForm = () => {
       }
     };
     fetchedFromData();
-  }, []);
+  }, [noteId]);
 
   console.log("note data existing value ---", noteData);
 
@@ -109,7 +109,7 @@ const UpdateNoteForm = () => {
     if (isSubmitSuccessful) {
       router.push("/dashboard");
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, router]);
 
   return (
     <div className="grid place-items-center h-screen ">

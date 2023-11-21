@@ -43,7 +43,7 @@ const UserProfile = () => {
     };
 
     fetchedInvitations();
-  }, [session]);
+  }, [session, receiver_Id]);
 
   // ******** Decline function
   const handleDecline = async (id) => {

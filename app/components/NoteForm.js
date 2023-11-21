@@ -27,7 +27,7 @@ const NoteForm = () => {
       setAllTeams(teams);
     };
     fetchedTeams();
-  }, [session?.user]);
+  }, [session?.user, setAllTeams]);
   const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
       title: "",

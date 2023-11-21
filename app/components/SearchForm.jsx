@@ -24,7 +24,7 @@ const SearchForm = () => {
 
   useEffect(() => {
     isSubmitSuccessful && reset();
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, reset]);
   return (
     <div className=" grid justify-center items-center w-full py-4  ">
       <div className="flex justify-center items-center bg-slate-300 px-5 py-3 rounded-full ">
