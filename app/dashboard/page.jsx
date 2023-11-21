@@ -146,7 +146,7 @@ const DashboardPage = () => {
               </p>
             )}
 
-            {!allNotes.length > 0 ? (
+            {!allNotes?.length > 0 ? (
               <div className="flex items-center justify-center">
                 <h1 className="text-3xl text-slate-500 ">
                   {allNotes?.message}
@@ -233,7 +233,7 @@ const DashboardPage = () => {
                   );
                 })}
               </div>
-            ) : !filteredNote.length > 0 ? (
+            ) : !filteredNote?.length > 0 ? (
               <div className="bg-slate-300 text-slate-700 flex items-center justify-center rounded-full p-4 text-xl capitalize ">
                 ~ No project found ~{" "}
               </div>
