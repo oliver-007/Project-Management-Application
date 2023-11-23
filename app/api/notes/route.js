@@ -39,14 +39,7 @@ export async function GET() {
       return b.createdAt - a.createdAt;
     });
 
-    return NextResponse.json(notesWithUser, {
-      status: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
+    return NextResponse.json(notesWithUser);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
