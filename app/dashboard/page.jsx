@@ -186,7 +186,7 @@ const DashboardPage = () => {
                         </div>
 
                         <div>
-                          <h4 className="flex items-center justify-between  ">
+                          <div className="flex items-center justify-between  ">
                             {/* Status : {status} */}
                             <h1>
                               {/* Priority : */}
@@ -226,7 +226,7 @@ const DashboardPage = () => {
                                 />
                               )}
                             </span>
-                          </h4>
+                          </div>
                         </div>
                       </div>
                     </Link>
