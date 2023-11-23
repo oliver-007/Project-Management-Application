@@ -19,7 +19,7 @@ const NoteForm = () => {
 
   // const { allUsers, setAllUsers } = useUser();
   const { allTeams, setAllTeams } = useTeam();
-  console.log("all teams form note form ----", allTeams);
+  // console.log("all teams form note form ----", allTeams);
   // console.log("all users from useUser hook====", allUsers);
   useEffect(() => {
     const fetchedTeams = async () => {
